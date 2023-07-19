@@ -1,15 +1,42 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+import googlemaps
 
-def create_graph():
+gmaps = googlemaps.Client(key='')
+
+#lista de endereço dos alunos da escola
+estudantes_endereco = ['rua vereador zino rodriges - PE','rua frei ricardo de pilar - PE','rua doutora francisca alves catao - PE','rua vereador zino rodrigues - PE']
+escola_endereco = ''
+
+#função para obter as coordenadas geográficas de um endereço (latitude e longitude) de um endereço
+def coletar_coordenadas(address):
+    geocode_result = gmaps.geocode(address)
+    if geocode_result:
+        localizacao = geocode_result[0]['geometria']['localizacao']
+        return(localizacao['lat'],localizacao['long'])
+    return None
+
+#exemplo de como usar a função para obter as coordenadas dos alunos e da escola
+coordenadas_estudantes =[coletar_coordenadas(address) for address in estudantes_endereco]
+coordenadas_escola = coletar_coordenadas(escola_endereco)
+
+print('Coordenadas dos alunos: ')
+print(coordenadas_estudantes)
+print('Coordenada da escola: ')
+print(coordenadas_escola)
+
+
+
+#daqui para baixo o cód só teve mudanças nas linhas 35 a 39, fora isso segue o mesmo
+def create_graph(): 
     G = nx.Graph()
 
     # Adicione os nós dos pontos de coleta dos alunos e a escola
-    G.add_nodes_from([('Aluno1', {'pos': (1, 2)}),
-                     ('Aluno2', {'pos': (4, 3)}),
-                     ('Aluno3', {'pos': (2, 7)}),
-                     ('Aluno4', {'pos': (5, 5)}),
-                     ('Escola', {'pos': (7, 4)})])
+    G.add_nodes_from([('Aluno1', {'address': 'Endereço do Aluno'}),
+                     ('Aluno2', {'address': 'Endereço do Aluno'}),
+                     ('Aluno3', {'address': 'Endereço do Aluno'}),
+                     ('Aluno4', {'address': 'Endereço do Aluno'}),
+                     ('Escola', {'address': 'Endereço do Aluno'})])
 
     # Adicione as arestas (tempos de transporte em minutos) entre os pontos
     G.add_edge('Aluno1', 'Aluno2', weight=5)
