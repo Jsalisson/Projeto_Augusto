@@ -31,4 +31,3 @@ if __name__ == "__main__":
     else:
         print(f"Não há caminho entre {origem} e {destino}.")
 
-        #ola
