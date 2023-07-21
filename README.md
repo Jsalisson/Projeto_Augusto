@@ -4,4 +4,4 @@ A idéia é criar um sistema para otimização de rota de uma van que pega um nu
 
 # é necessário que baixe as seguintes bibliotecas para poder rodar o código principal
   #NetworkX = Biblioteca de grafos
-  
+  #matplotlib.pyplot  
