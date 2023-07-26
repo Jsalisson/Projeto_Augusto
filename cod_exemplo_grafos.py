@@ -2,24 +2,24 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import random
 
-numero_1 = random.randint(1, 20)
-numero_2 = random.randint(1, 20)
-numero_3 = random.randint(1, 20)
-numero_4 = random.randint(1, 20)
-numero_5 = random.randint(1, 20)
-numero_6 = random.randint(1, 20)
-numero_7 = random.randint(1, 20)
-numero_8 = random.randint(1, 20)
-numero_9 = random.randint(1, 20)
-numero_10 = random.randint(1, 20)
-numero_11 = random.randint(1, 20)
-numero_12 = random.randint(1, 20)
-numero_13 = random.randint(1, 20)
-numero_14 = random.randint(1, 20)
-numero_15 = random.randint(1, 20)
+numero_1 = random.randint(1, 30)
+numero_2 = random.randint(1, 30)
+numero_3 = random.randint(1, 30)
+numero_4 = random.randint(1, 30)
+numero_5 = random.randint(1, 30)
+numero_6 = random.randint(1, 30)
+numero_7 = random.randint(1, 30)
+numero_8 = random.randint(1, 30)
+numero_9 = random.randint(1, 30)
+numero_10 = random.randint(1, 30)
+numero_11 = random.randint(1, 30)
+numero_12 = random.randint(1, 30)
+numero_13 = random.randint(1, 30)
+numero_14 = random.randint(1, 30)
+numero_15 = random.randint(1, 30)
 
 
-# Função para gerar um número aleatório entre 1 e 20
+# Função para gerar um número aleatório entre 1 e 30
 def numero_aleatorio():
   return random.randint(1, 20)
 
@@ -36,19 +36,12 @@ def criar_grafo():
   G = nx.Graph()
 
   # Adicione os nós dos pontos de coleta dos alunos e a escola
-  G.add_nodes_from([('Aluno1', {
-    'pos': (var1)
-  }), ('Aluno2', {
-    'pos': (var2)
-  }), ('Aluno3', {
-    'pos': (var3)
-  }), ('Aluno4', {
-    'pos': (var4)
-  }), ('Casa', {
-    'pos': (var5)
-  }), ('Escola', {
-    'pos': (var6)
-  })])
+  G.add_nodes_from([('Aluno1', {'pos': (var1)}),
+                    ('Aluno2', {'pos': (var2)}),
+                    ('Aluno3', {'pos': (var3)}),
+                    ('Aluno4', {'pos': (var4)}),
+                    ('Casa', {'pos': (var5)}),
+                    ('Escola', {'pos': (var6)})])
 
   G.add_edge('Casa', 'Escola', weight=14)
 
@@ -73,10 +66,7 @@ def criar_grafo():
   return G
 
 
-def encontrar_melhor_trajeto(grafo,
-                             ponto_inicial,
-                             alunos_a_coletar,
-                             caminho=[]):
+def encontrar_melhor_trajeto(grafo,ponto_inicial,alunos_a_coletar,caminho=[]):
   caminho = caminho + [ponto_inicial]
 
   if len(caminho) == len(alunos_a_coletar) + 1:
@@ -85,11 +75,9 @@ def encontrar_melhor_trajeto(grafo,
   melhor_trajeto = None
   for vizinho in grafo.neighbors(ponto_inicial):
     if vizinho not in caminho and vizinho in alunos_a_coletar:
-      novo_trajeto = encontrar_melhor_trajeto(grafo, vizinho, alunos_a_coletar,
-                                              caminho)
+      novo_trajeto = encontrar_melhor_trajeto(grafo, vizinho, alunos_a_coletar,caminho)
       if novo_trajeto:
-        if not melhor_trajeto or calcular_peso_total(
-            grafo, novo_trajeto) < calcular_peso_total(grafo, melhor_trajeto):
+        if not melhor_trajeto or calcular_peso_total(grafo, novo_trajeto) < calcular_peso_total(grafo, melhor_trajeto):
           melhor_trajeto = novo_trajeto
 
   return melhor_trajeto
@@ -108,8 +96,7 @@ def main():
   alunos_a_coletar = ['Aluno1', 'Aluno2', 'Aluno3', 'Aluno4']
   ponto_inicial = 'Casa'
 
-  melhor_trajeto = encontrar_melhor_trajeto(grafo, ponto_inicial,
-                                            alunos_a_coletar)
+  melhor_trajeto = encontrar_melhor_trajeto(grafo, ponto_inicial,alunos_a_coletar)
 
   melhor_trajeto.append('Escola')
 
@@ -117,23 +104,15 @@ def main():
   print("Trajeto ótimo para coletar os alunos e levar para a escola:")
   print(melhor_trajeto)
 
-  # Desenhe o grafo com o trajeto ótimo destacado
+  # Desenha o grafo com o melhor trajeto destacado
   pos = nx.get_node_attributes(grafo, 'pos')
   plt.figure(figsize=(10, 8))
   nx.draw(grafo, pos, with_labels=True, node_size=3000, node_color='lightblue')
-  nx.draw_networkx_nodes(grafo,
-                         pos,
-                         nodelist=melhor_trajeto,
-                         node_color='red',
-                         node_size=3000)
+  nx.draw_networkx_nodes(grafo,pos,nodelist=melhor_trajeto,node_color='red',node_size=3000)
 
-  # Converta o objeto zip em uma lista explícita
+  # Converte o objeto zip em uma lista explícita
   arestas = list(zip(melhor_trajeto, melhor_trajeto[1:]))
-  nx.draw_networkx_edges(grafo,
-                         pos,
-                         edgelist=arestas,
-                         edge_color='red',
-                         width=3)
+  nx.draw_networkx_edges(grafo,pos,edgelist=arestas,edge_color='red',width=3)
 
   labels = nx.get_edge_attributes(grafo, 'weight')
   nx.draw_networkx_edge_labels(grafo, pos, edge_labels=labels)
@@ -142,3 +121,5 @@ def main():
 
 if __name__ == "__main__":
   main()
+
+print('teste')
