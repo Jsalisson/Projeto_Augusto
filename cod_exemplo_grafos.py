@@ -47,11 +47,6 @@ def calculate_total_weight(graph, path):
         total_weight += graph[path[i]][path[i + 1]]['weight']
     return total_weight
 
-import networkx as nx
-import matplotlib.pyplot as plt
-
-# Restante do código...
-
 def main():
     graph = create_graph()
 
