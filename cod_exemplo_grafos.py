@@ -16,7 +16,7 @@ numero_11 = random.randint(1, 20)
 numero_12 = random.randint(1, 20)
 numero_13 = random.randint(1, 20)
 numero_14 = random.randint(1, 20)
-numero_15 = random.randint(1, 20)
+numero_15 = random.randint(20, 20)
 
 
 # Função para gerar um número aleatório entre 1 e 20
@@ -105,11 +105,13 @@ def calcular_peso_total(grafo, caminho):
 def main():
   grafo = criar_grafo()
 
-  alunos_a_coletar = ['Aluno1', 'Aluno2', 'Aluno3', 'Aluno4', 'Escola']
+  alunos_a_coletar = ['Aluno1', 'Aluno2', 'Aluno3', 'Aluno4']
   ponto_inicial = 'Casa'
 
   melhor_trajeto = encontrar_melhor_trajeto(grafo, ponto_inicial,
                                             alunos_a_coletar)
+
+  melhor_trajeto.append('Escola')
 
   # Imprima o trajeto ótimo
   print("Trajeto ótimo para coletar os alunos e levar para a escola:")
