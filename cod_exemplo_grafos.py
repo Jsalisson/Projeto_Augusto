@@ -16,7 +16,7 @@ numero_11 = random.randint(1, 20)
 numero_12 = random.randint(1, 20)
 numero_13 = random.randint(1, 20)
 numero_14 = random.randint(1, 20)
-numero_15 = random.randint(20, 20)
+numero_15 = random.randint(1, 20)
 
 
 # Função para gerar um número aleatório entre 1 e 20
